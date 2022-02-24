@@ -7,7 +7,7 @@ class SessionsController {
   async store (request, response) {
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
-      password: Yup.string().required()
+      password_hash: Yup.string().required()
     })
 
     const EmailOrPassordIncorrect = () => {
@@ -18,7 +18,7 @@ class SessionsController {
       return EmailOrPassordIncorrect()
     }
 
-    const { email, password } = request.body
+    const { email, password_hash } = request.body
 
     const user = await User.findOne({
       where: { email }
